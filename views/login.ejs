@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="./css/main.css">
+
+  <style>
+    body {
+      background-image: url('https://thumbs.dreamstime.com/b/group-circle-teamwork-open-hands-people-support-community-help-bottom-view-collaboration-trust-motivation-closeup-278399507.jpg'); /* Replace with your background image path */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .form-container {
+      background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for form */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      max-width: 400px; /* Adjust width as needed */
+      width: 100%;
+      margin-top: 3cm; /* Move down 3 cm */
+      margin-left: 11cm; /* Move right 11 cm */
+    }
+
+    .mssg {
+      text-align: center;
+      margin-top: 10px;
+      color: #fff; /* Text color for messages */
+    }
+
+    .mssg span {
+      display: block;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background for message box */
+      border-radius: 5px;
+    }
+  </style>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#form").submit(function(event) {
+        event.preventDefault();
+        $.ajax({
+          type: 'POST',
+          url: '/login',
+          data: $('#form').serialize(),
+          dataType: "json",
+          success: function(response){
+            $('#form')[0].reset();
+            $('#check').html(response.Success);
+
+            // Hide message after 3 seconds
+            setTimeout(function(){
+              $('#check').html("");
+            }, 3000);
+
+            // Redirect to new page if login successful
+            if (response.Success == "Success!") {
+              window.location.href = 'http://localhost:3000/create';
+            }
+          },
+          error: function() {
+            // Handle error
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4 form-container">
+        <div>
+          <h2 style="text-align: center; color: #333;">Login</h2>
+        </div>
+        <div class="form-group">
+          <form id="form" method="post">
+            <input type="text" name="email" placeholder="E-mail" required="" class="form-control"><br/>
+            <input type="password" name="password" placeholder="Password" required="" class="form-control"><br/>
+            <input type="submit" value="Login" class="btn btn-success">
+          </form>
+        </div>
+        <div class="mssg">
+          <span id="check"></span>
+        </div>
+        <div>
+          <span style="color: #fff;">Do you forgot password? <a href="/forgetpass">Click here to change password</a></span>
+        </div>
+        <div>
+          <span style="color: #fff;">Create a new Account? <a href="/">Register here</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
