@@ -79,6 +79,4 @@ The server will start Running on
 
 
 <br><br>
-<div align="center">
-<a href="https://www.buymeacoffee.com/YwGKcxa" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a></div>
 
